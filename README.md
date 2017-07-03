@@ -41,6 +41,23 @@ To build after all dependencies are installed:
     cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo .
     make
 
+OSX Addendum: because of how OSX stores and ships OpenSSL, you may need to run the following (requires homebrew):
+   brew install openssl
+   brew install autoconf
+   brew install automake
+   brew install gcc4.9
+   brew install git
+   brew install boost
+
+Then install and setup bitshares
+    git clone https://github.com/bitshares/bitshares-core.git
+    cd bitshares-core
+    git checkout <LATEST_RELEASE_TAG>
+    git submodule update --init --recursive
+    cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DOPENSSL_ROOT_DIR=/usr/local/opt/openssl .
+    make
+
+
 **NOTE:** BitShares requires an [OpenSSL](https://www.openssl.org/) version in the 1.0.x series. OpenSSL 1.1.0 and newer are NOT supported. If your system OpenSSL version is newer, then you will need to manually provide an older version of OpenSSL and specify it to CMake using `-DOPENSSL_INCLUDE_DIR`, `-DOPENSSL_SSL_LIBRARY`, and `-DOPENSSL_CRYPTO_LIBRARY`.
 
 **NOTE:** BitShares requires a [Boost](http://www.boost.org/) version in the range [1.57, 1.60]. Versions earlier than
